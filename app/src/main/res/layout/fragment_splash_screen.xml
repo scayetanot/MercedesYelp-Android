@@ -13,4 +13,8 @@
         android:layout_gravity="center"
         android:src="@drawable/logo"/>
 
+    <include
+        android:id="@+id/loading"
+        layout="@layout/layout_loading" />
+
 </FrameLayout>
