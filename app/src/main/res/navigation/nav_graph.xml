@@ -12,7 +12,9 @@
         tools:layout="@layout/fragment_splash_screen" >
         <action
             android:id="@+id/action_splashScreenFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/nav_graph"/>
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
@@ -21,16 +23,13 @@
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_homeFragment_to_detailsFragment"
-            app:destination="@id/detailsFragment" />
+            app:destination="@id/detailsFragment">
+        </action>
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
         android:name="com.whatevrdev.mercedesyelp.ui.DetailsFragment"
         android:label="fragment_details"
         tools:layout="@layout/fragment_details">
-        <argument
-            android:name="id"
-            android:defaultValue=""
-            app:argType="string" />
     </fragment>
 </navigation>
