@@ -25,10 +25,11 @@
             android:layout_height="76dp"
             android:layout_marginStart="@dimen/default_margin"
             android:background="@color/red_blur"
+            android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:itemImage="@{item.imageUrl}"/>
+            />
 
         <TextView
             android:id="@+id/restaurantName"
@@ -47,7 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/default_margin"
-            android:text="@{item.rating}"
+            android:text="@{item.rating.toString()}"
             app:layout_constraintTop_toTopOf="@+id/restaurantName"
             app:layout_constraintBottom_toBottomOf="@id/restaurantName"
             app:layout_constraintEnd_toEndOf="parent"

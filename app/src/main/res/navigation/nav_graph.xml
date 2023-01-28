@@ -27,5 +27,10 @@
         android:id="@+id/detailsFragment"
         android:name="com.whatevrdev.mercedesyelp.ui.DetailsFragment"
         android:label="fragment_details"
-        tools:layout="@layout/fragment_details" />
+        tools:layout="@layout/fragment_details">
+        <argument
+            android:name="id"
+            android:defaultValue=""
+            app:argType="string" />
+    </fragment>
 </navigation>

@@ -1,17 +1,19 @@
 package com.whatevrdev.mercedesyelp.ui
 
 import android.Manifest
+import android.location.Geocoder
+import android.location.Location
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.whatevrdev.mercedesyelp.databinding.FragmentHomeBinding
 import com.whatevrdev.mercedesyelp.ui.adapters.ListOfRestaurantsAdapter
@@ -19,6 +21,7 @@ import com.whatevrdev.mercedesyelp.ui.states.LocationState
 import com.whatevrdev.mercedesyelp.ui.states.SearchResultState
 import com.whatevrdev.mercedesyelp.ui.viewmodels.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -28,7 +31,7 @@ class HomeFragment : Fragment() {
     private val viewModel: HomeViewModel by viewModels()
 
     private val listOfRestaurantsAdapter : ListOfRestaurantsAdapter by lazy {
-        ListOfRestaurantsAdapter(viewModel)
+        ListOfRestaurantsAdapter(context, viewModel)
     }
 
     private val locationPermissionRequest = registerForActivityResult(
@@ -83,6 +86,7 @@ class HomeFragment : Fragment() {
                         requestLocationPermissions()
                     }
                     is LocationState.LocationOnSuccess -> {
+                        updateCurrentLocation(it.location)
                         viewModel.searchRestaurant(it.location.latitude, it.location.longitude)
                     }
                     is LocationState.LocationOnError -> {
@@ -109,8 +113,20 @@ class HomeFragment : Fragment() {
                         binding.loading.loadingLayout.isVisible = false
                         Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
                     }
+                    is SearchResultState.DisplayDetails -> {
+                       //Go to details page
+                    }
                 }
             }
+        }
+    }
+
+    private fun updateCurrentLocation(loc: Location){
+        var geocoder =
+            Geocoder(requireContext(), Locale.getDefault()).getFromLocation(loc.latitude, loc.longitude, 1)
+
+        geocoder?.get(0)?.let {
+            binding.homeLocationName.text = it.locality + ", " + it.postalCode
         }
     }
 }

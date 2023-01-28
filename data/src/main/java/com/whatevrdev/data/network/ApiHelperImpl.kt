@@ -17,10 +17,14 @@ class ApiHelperImpl @Inject  constructor(
     ): ApiResult<RetrofitSearchResponse> = withContext(Dispatchers.IO) {
         try {
             val response = apiService.searchForRestaurants(
-                BuildConfig.TOKEN,
+                "Bearer " + BuildConfig.TOKEN,
                 latitude,
-                longitude
-            )
+                longitude,
+                20,
+                "restaurants",
+                10000,
+                "hot_and_new",
+        "distance")
             ApiResult.OnSuccess(response)
         } catch (e: Exception) {
             ApiResult.OnError(e)

@@ -4,12 +4,18 @@ import com.whatevrdev.data.network.models.RetrofitSearchResponse
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface ApiService {
-    @GET("v3/businesses/search?latitude={latitude}&longitude={longitude}&term=restaurants&attributes=hot_and_new&sort_by=best_match&limit=20")
+    @GET("businesses/search")
     suspend fun searchForRestaurants(
         @Header("Authorization") token: String,
-        @Path("latitude") latitude: Double,
-        @Path("longitude") longitude: Double,
+        @Query("latitude") latitude: Double,
+        @Query("longitude") longitude: Double,
+        @Query("limit") limit: Int,
+        @Query("term") term: String,
+        @Query("radius") radius: Int,
+        @Query("attributes") attributes: String,
+        @Query("sort_by") sort_by: String
         ): RetrofitSearchResponse
 }

@@ -8,7 +8,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 
 class GeneralBindingAdapters {
-    @BindingAdapter("itemImage", "shouldOverride", requireAll = false)
+//    @BindingAdapter("itemImage", "shouldOverride", requireAll = false)
     fun ImageView.itemImage(imageUrl: String?, shouldOverride: Boolean = false) {
         imageUrl?.let { url ->
             val options = RequestOptions()

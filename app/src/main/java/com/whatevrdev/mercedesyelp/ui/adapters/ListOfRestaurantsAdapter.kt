@@ -1,5 +1,6 @@
 package com.whatevrdev.mercedesyelp.ui.adapters
 
+import android.content.Context
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -7,7 +8,7 @@ import com.whatevrdev.domain.entities.YelpBusiness
 import com.whatevrdev.mercedesyelp.ui.viewholders.ListOfRestaurantsViewHolder
 import com.whatevrdev.mercedesyelp.ui.viewmodels.HomeViewModel
 
-class ListOfRestaurantsAdapter(private val viewModel: HomeViewModel) :
+class ListOfRestaurantsAdapter(private val context: Context?, private val viewModel: HomeViewModel) :
     ListAdapter<YelpBusiness, ListOfRestaurantsViewHolder>(RESTAURANT_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListOfRestaurantsViewHolder =
@@ -16,7 +17,7 @@ class ListOfRestaurantsAdapter(private val viewModel: HomeViewModel) :
     override fun onBindViewHolder(holder: ListOfRestaurantsViewHolder, position: Int) {
         val item = getItem(position)
         item?.let {
-            holder.bind(it, viewModel)
+            holder.bind(context, it, viewModel)
         }
     }
 

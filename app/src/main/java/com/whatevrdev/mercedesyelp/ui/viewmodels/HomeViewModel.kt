@@ -37,7 +37,7 @@ class HomeViewModel @Inject constructor(
     }
 
     fun onClick(id: String) {
-
+        _searchResultState.value = SearchResultState.DisplayDetails(id)
     }
     fun requestLocation() = getCurrentLocation()
 
