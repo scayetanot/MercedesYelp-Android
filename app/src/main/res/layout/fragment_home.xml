@@ -70,6 +70,10 @@
 
             </androidx.recyclerview.widget.RecyclerView>
 
+            <include
+                android:id="@+id/loading"
+                layout="@layout/layout_loading" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>

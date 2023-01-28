@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -10,6 +11,8 @@ android {
     defaultConfig {
         minSdk 24
         targetSdk 33
+
+        buildConfigField "String", "TOKEN", "\"OyFRR5PRd5I5hJ1f1ihFkqyANxelEJi0L6T06z3OvrthiWSan7_0ZZSZ_IhganUVxsCMwcxA-qmCeJJGkcyN-zW5CMWm-IVlyc0JZx2Ya92MU6Smr9OTuHuoy2EzY3Yx\""
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -27,14 +30,30 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+        freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
     }
 }
 
+kapt {
+    correctErrorTypes = true
+    generateStubs = true
+}
+
 dependencies {
+    api project(':domain')
+
+    api 'javax.inject:javax.inject:1'
 
     implementation 'androidx.core:core-ktx:1.9.0'
     implementation 'androidx.appcompat:appcompat:1.6.0'
     implementation 'com.google.android.material:material:1.8.0'
+
+    // retrofit okhttp
+    api "com.squareup.retrofit2:retrofit:2.9.0"
+    api "com.squareup.okhttp3:okhttp:4.10.0"
+    api "com.squareup.okhttp3:logging-interceptor:4.10.0"
+
+
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'

@@ -5,11 +5,19 @@
 
     <data>
 
+        <variable
+            name="item"
+            type="com.whatevrdev.domain.entities.YelpBusiness" />
+
+        <variable
+            name="viewModel"
+            type="com.whatevrdev.mercedesyelp.ui.viewmodels.HomeViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp">
+        android:layout_height="100dp"
+        android:onClick="@{() -> viewModel.onClick(item.id)}">
 
         <ImageView
             android:id="@+id/restaurantImage"
@@ -19,7 +27,8 @@
             android:background="@color/red_blur"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:itemImage="@{item.imageUrl}"/>
 
         <TextView
             android:id="@+id/restaurantName"
@@ -27,6 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/medium_margin"
             android:textAppearance="@style/SubHeader"
+            android:text="@{item.name}"
             app:layout_constraintTop_toTopOf="@+id/restaurantImage"
             app:layout_constraintStart_toEndOf="@+id/restaurantImage"
             app:layout_constraintEnd_toStartOf="@+id/restaurantRating"
@@ -37,6 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/default_margin"
+            android:text="@{item.rating}"
             app:layout_constraintTop_toTopOf="@+id/restaurantName"
             app:layout_constraintBottom_toBottomOf="@id/restaurantName"
             app:layout_constraintEnd_toEndOf="parent"
@@ -48,6 +59,7 @@
             android:layout_height="0dp"
             android:layout_marginStart="@dimen/medium_margin"
             android:layout_marginTop="@dimen/small_margin"
+            android:text="@{item.price}"
             app:layout_constraintStart_toEndOf="@+id/restaurantImage"
             app:layout_constraintEnd_toStartOf="@+id/restaurantDistance"
             app:layout_constraintTop_toBottomOf="@+id/restaurantName"
@@ -61,6 +73,7 @@
             android:layout_marginStart="@dimen/default_margin"
             android:layout_marginTop="@dimen/small_margin"
             android:layout_marginEnd="@dimen/default_margin"
+            android:text="@{item.distance.toString()}"
             app:layout_constraintStart_toEndOf="@+id/restaurantPrice"
             app:layout_constraintTop_toBottomOf="@+id/restaurantName"
             app:layout_constraintBottom_toBottomOf="@id/restaurantImage"
