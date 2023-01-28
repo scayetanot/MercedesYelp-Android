@@ -8,7 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.whatevrdev.mercedesyelp.R
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SplashScreenFragment : Fragment() {
 
     override fun onCreateView(

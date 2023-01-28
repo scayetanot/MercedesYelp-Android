@@ -3,7 +3,7 @@
     <string name="title_activity_main">MainActivity</string>
 
     <!-- Home Fragment -->
-    <string name="title_home_page">List of the hotest resturant near you!</string>
+    <string name="title_home_page">List of the hotest restaurants near you!</string>
     <string name="location_dflt">location</string>
     <string name="name">name</string>
     <string name="rating">rating</string>
