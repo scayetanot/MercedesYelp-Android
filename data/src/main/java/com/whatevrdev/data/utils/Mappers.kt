@@ -17,7 +17,7 @@ object Mappers {
         retrofitBusinesses.forEach{
             listOfBusiness.add(
                 YelpBusiness(
-                    id=it.id,
+                    id = it.id,
                     name = it.name,
                     rating = it.rating,
                     price = it.price,
