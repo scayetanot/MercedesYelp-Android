@@ -5,6 +5,7 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Singleton
 import com.whatevrdev.data.BuildConfig
+import com.whatevrdev.data.network.models.RetrofitDetailsResponse
 
 
 @Singleton
@@ -25,6 +26,20 @@ class ApiHelperImpl @Inject  constructor(
                 10000,
                 "hot_and_new",
         "distance")
+            ApiResult.OnSuccess(response)
+        } catch (e: Exception) {
+            ApiResult.OnError(e)
+        }
+    }
+
+    override suspend fun getRestaurantDetails(
+        id: String
+    ): ApiResult<RetrofitDetailsResponse> = withContext(Dispatchers.IO) {
+        try {
+            val response = apiService.getRestaurantDetails(
+                "Bearer " + BuildConfig.TOKEN,
+                id
+            )
             ApiResult.OnSuccess(response)
         } catch (e: Exception) {
             ApiResult.OnError(e)

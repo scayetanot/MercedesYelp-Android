@@ -1,9 +1,13 @@
 package com.whatevrdev.data.utils
 
+import android.location.Address
 import com.whatevrdev.data.network.models.RetrofitBusiness
+import com.whatevrdev.data.network.models.RetrofitDetailsResponse
 import com.whatevrdev.data.network.models.RetrofitSearchResponse
+import com.whatevrdev.domain.entities.YelpAddress
 import com.whatevrdev.domain.entities.YelpBusiness
 import com.whatevrdev.domain.entities.YelpBusinesses
+import com.whatevrdev.domain.entities.YelpRestaurantDetails
 import kotlin.math.roundToInt
 
 object Mappers {
@@ -26,6 +30,26 @@ object Mappers {
             )
         }
         return listOfBusiness.toList()
+    }
+
+    fun fromRetrofitDetailsResponseToDetails(retrofitDetailsResponse: RetrofitDetailsResponse): YelpRestaurantDetails {
+        return YelpRestaurantDetails(
+            id = retrofitDetailsResponse.id,
+            name = retrofitDetailsResponse.name,
+            price = retrofitDetailsResponse.price,
+            imageUrl = retrofitDetailsResponse.imageUrl,
+            rating = retrofitDetailsResponse.rating,
+            phoneNumber = retrofitDetailsResponse.displayPhone,
+            address = YelpAddress(
+                address1 = retrofitDetailsResponse.location?.address1,
+                address2 = retrofitDetailsResponse.location?.address2,
+                address3 = retrofitDetailsResponse.location?.address3,
+                city = retrofitDetailsResponse.location?.city,
+                zipCode = retrofitDetailsResponse.location?.zipCode,
+                country = retrofitDetailsResponse.location?.country,
+                state = retrofitDetailsResponse.location?.state
+                )
+        )
     }
 
     fun fromMetersToMiles(distance: Double?): String {

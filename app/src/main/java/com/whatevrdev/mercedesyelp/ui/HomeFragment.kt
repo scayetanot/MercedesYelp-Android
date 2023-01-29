@@ -10,11 +10,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.whatevrdev.mercedesyelp.R
 import com.whatevrdev.mercedesyelp.databinding.FragmentHomeBinding
 import com.whatevrdev.mercedesyelp.ui.adapters.ListOfRestaurantsAdapter
 import com.whatevrdev.mercedesyelp.ui.states.LocationState
@@ -95,6 +98,7 @@ class HomeFragment : Fragment() {
                             "Error: ${it.errorMessage}",
                             Toast.LENGTH_LONG).show()
                     }
+                    else -> Unit
                 }
             }
         }
@@ -114,8 +118,10 @@ class HomeFragment : Fragment() {
                         Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
                     }
                     is SearchResultState.DisplayDetails -> {
-                       //Go to details page
+                        val bundle = bundleOf("id" to it.id)
+                        findNavController().navigate(R.id.detailsFragment, bundle)
                     }
+                    else -> Unit
                 }
             }
         }

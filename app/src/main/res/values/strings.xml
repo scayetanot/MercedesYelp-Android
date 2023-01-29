@@ -10,4 +10,7 @@
     <string name="price">price</string>
     <string name="distance">distance</string>
 
+    <!-- Details Fragment -->
+    <string name="no_restaurant_id">Sorry! we didn\'t find any restaurants matching your request</string>
+
 </resources>
