@@ -28,13 +28,12 @@ class ListOfRestaurantsViewHolder(val binding: ItemRestaurantBinding):
                     Glide
                         .with(it)
                         .load(url)
-                        .apply(options)
+                        //.apply(options)
                         .into(binding.restaurantImage)
                 } catch (e: Exception) {
                     Log.e("","Thumbnail Failed in Glide...using error drawable resource")
                 }
             }
-
         }
         binding.executePendingBindings()
     }

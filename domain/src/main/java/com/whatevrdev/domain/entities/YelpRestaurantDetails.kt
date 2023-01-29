@@ -9,5 +9,6 @@ data class YelpRestaurantDetails(
     val imageUrl: String?,
     val rating: Float?,
     val phoneNumber: String?,
-    val address: YelpAddress?
+    val address: YelpAddress?,
+    val addressDisplay: String?
 )

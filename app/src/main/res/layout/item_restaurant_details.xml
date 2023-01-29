@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="viewModel"
-            type="com.whatevrdev.mercedesyelp.ui.viewmodels.DetailsViewModel" />
+            name="item"
+            type="com.whatevrdev.domain.entities.YelpRestaurantDetails" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -30,6 +30,7 @@
             android:layout_marginTop="@dimen/medium_margin"
             android:layout_marginEnd="@dimen/medium_margin"
             android:textSize="34sp"
+            android:text="@{item.rating.toString()}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/restaurantImage"
             tools:text="3.5"/>
@@ -41,6 +42,7 @@
             android:background="@android:color/white"
             android:textAppearance="@style/SubHeader"
             android:textSize="18sp"
+            android:text="@{item.name}"
             android:layout_marginStart="@dimen/default_margin"
             android:layout_marginEnd="@dimen/default_margin"
             app:layout_constraintStart_toStartOf="parent"
@@ -55,6 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/default_margin"
             android:layout_marginEnd="@dimen/default_margin"
+            android:text="@{item.addressDisplay}"
             app:layout_constraintTop_toBottomOf="@+id/restaurantName"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -66,6 +69,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/default_margin"
             android:layout_marginEnd="@dimen/default_margin"
+            android:text="@{item.phoneNumber}"
             app:layout_constraintTop_toBottomOf="@+id/restaurantAddress"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

@@ -45,7 +45,11 @@ object Mappers {
                 zipCode = retrofitDetailsResponse.location?.zipCode,
                 country = retrofitDetailsResponse.location?.country,
                 state = retrofitDetailsResponse.location?.state
-                )
+                ),
+            addressDisplay = retrofitDetailsResponse.location?.address1 + ", " +
+                    retrofitDetailsResponse.location?.city + ", " +
+                    retrofitDetailsResponse.location?.state + ", " +
+                    retrofitDetailsResponse.location?.zipCode
         )
     }
 

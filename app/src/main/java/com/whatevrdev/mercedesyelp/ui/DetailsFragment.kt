@@ -83,6 +83,7 @@ class DetailsFragment : Fragment() {
                 when(it) {
                     is RestaurantDetailsState.Success -> {
                         binding.loading.loadingLayout.isVisible = false
+                        restaurantDetailsAdapter.updateDetails(it.restaurantDetails)
                     }
                     is RestaurantDetailsState.Error -> {
                         binding.loading.loadingLayout.isVisible = false

@@ -21,7 +21,7 @@ data class RetrofitDetailsResponse(
     @SerializedName("price") val price: String?,
     @SerializedName("rating") val rating: Float?,
     @SerializedName("review_count") val reviewCount: Double?,
-    @SerializedName("hours") val hours: RetrofitHours,
+    @SerializedName("hours") val hours: List<RetrofitHours?>,
     @SerializedName("special_hours") val specialHours: List<RetrofitSpecialHours>,
     @SerializedName("transactions") val transactions: List<String?>,
     @SerializedName("url") val url: String?,

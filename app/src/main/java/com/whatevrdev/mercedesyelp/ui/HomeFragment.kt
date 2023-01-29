@@ -34,7 +34,7 @@ class HomeFragment : Fragment() {
     private val viewModel: HomeViewModel by viewModels()
 
     private val listOfRestaurantsAdapter : ListOfRestaurantsAdapter by lazy {
-        ListOfRestaurantsAdapter(context, viewModel)
+        ListOfRestaurantsAdapter(requireContext(), viewModel)
     }
 
     private val locationPermissionRequest = registerForActivityResult(
