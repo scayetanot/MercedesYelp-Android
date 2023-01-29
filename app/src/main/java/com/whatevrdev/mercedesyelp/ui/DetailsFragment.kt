@@ -10,13 +10,16 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ConcatAdapter
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.whatevrdev.mercedesyelp.R
 import com.whatevrdev.mercedesyelp.databinding.FragmentDetailsBinding
+import com.whatevrdev.mercedesyelp.ui.adapters.RestaurantDetailsAdapter
+import com.whatevrdev.mercedesyelp.ui.adapters.RestaurantReviewsAdapter
 import com.whatevrdev.mercedesyelp.ui.states.RestaurantDetailsState
 import com.whatevrdev.mercedesyelp.ui.states.RestaurantReviewsState
 import com.whatevrdev.mercedesyelp.ui.viewmodels.DetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class DetailsFragment : Fragment() {
@@ -25,6 +28,20 @@ class DetailsFragment : Fragment() {
 
     private val viewModel: DetailsViewModel by viewModels()
     private var restaurantId: String = ""
+
+    private val restaurantDetailsAdapter: RestaurantDetailsAdapter by lazy {
+        RestaurantDetailsAdapter(context, viewModel)
+    }
+
+    private val restaurantReviewsAdapter: RestaurantReviewsAdapter by lazy {
+        RestaurantReviewsAdapter(context)
+    }
+
+    private val concatAdapter: ConcatAdapter by lazy {
+        ConcatAdapter(
+            restaurantDetailsAdapter,
+            restaurantReviewsAdapter)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +64,10 @@ class DetailsFragment : Fragment() {
             viewModel.getRestaurantInformation(restaurantId)
         }
         binding = FragmentDetailsBinding.inflate(layoutInflater)
+        binding.detailsConcatView.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = concatAdapter
+        }
         return binding.root
     }
 
@@ -81,6 +102,7 @@ class DetailsFragment : Fragment() {
             viewModel.restaurantReviewsState.collect {
                 when(it) {
                     is RestaurantReviewsState.Success -> {
+                        restaurantReviewsAdapter.submitList(it.restaurantReviews)
                         binding.loading.loadingLayout.isVisible = false
                     }
                     is RestaurantReviewsState.Error -> {

@@ -30,8 +30,8 @@ interface ApiService {
     @GET("businesses/{id}/reviews")
     suspend fun getRestaurantReviews(
         @Header("Authorization") token: String,
+        @Path("id") id: String,
         @Query("limit") limit: Int,
         @Query("sort_by") sort_by: String,
-        @Path("id") id: String
     ): RetrofitReviewsResponse
 }

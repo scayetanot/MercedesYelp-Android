@@ -1,12 +1,11 @@
 package com.whatevrdev.data.utils
 
-import android.location.Address
+
 import com.whatevrdev.data.network.models.RetrofitBusiness
 import com.whatevrdev.data.network.models.RetrofitDetailsResponse
 import com.whatevrdev.data.network.models.RetrofitReview
 import com.whatevrdev.data.network.models.RetrofitSearchResponse
 import com.whatevrdev.domain.entities.*
-import kotlin.math.roundToInt
 
 object Mappers {
     fun fromRetrofitSearchResponseToBusinesses(retrofitSearch: RetrofitSearchResponse): YelpBusinesses {
@@ -59,7 +58,7 @@ object Mappers {
                     url = it.url,
                     text = it.text,
                     rating = it.rating,
-                    timeCreated =  it.timeCreated,
+                    timeCreated =  it.timeCreated?.split(' ')?.first(),
                     user = YelpUser(
                         id = it.user?.id,
                         imageUrl = it.user?.imageUrl,

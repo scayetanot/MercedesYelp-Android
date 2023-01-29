@@ -55,6 +55,8 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
+    implementation "androidx.recyclerview:recyclerview:1.2.1"
+
 
     //Dagger Hilt
     implementation "com.google.dagger:hilt-android:2.44.2"
