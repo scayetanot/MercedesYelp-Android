@@ -7,6 +7,6 @@ data class RetrofitReview(
     @SerializedName("url") val url: String?,
     @SerializedName("text") val text: String?,
     @SerializedName("rating") val rating: Double?,
-    @SerializedName("timeCreated") val time_created: String?,
+    @SerializedName("timeCreated") val timeCreated: String?,
     @SerializedName("user") val user: RetrofitUser?
 )

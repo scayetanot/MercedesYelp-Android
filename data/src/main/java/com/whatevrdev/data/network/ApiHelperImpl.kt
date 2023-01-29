@@ -6,6 +6,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 import com.whatevrdev.data.BuildConfig
 import com.whatevrdev.data.network.models.RetrofitDetailsResponse
+import com.whatevrdev.data.network.models.RetrofitReviewsResponse
 
 
 @Singleton
@@ -18,14 +19,14 @@ class ApiHelperImpl @Inject  constructor(
     ): ApiResult<RetrofitSearchResponse> = withContext(Dispatchers.IO) {
         try {
             val response = apiService.searchForRestaurants(
-                "Bearer " + BuildConfig.TOKEN,
-                latitude,
-                longitude,
-                20,
-                "restaurants",
-                10000,
-                "hot_and_new",
-        "distance")
+                token = "Bearer " + BuildConfig.TOKEN,
+                latitude = latitude,
+                longitude = longitude,
+                limit = 20,
+                term = "restaurants",
+                radius = 10000,
+                attributes = "hot_and_new",
+                sort_by = "distance")
             ApiResult.OnSuccess(response)
         } catch (e: Exception) {
             ApiResult.OnError(e)
@@ -37,8 +38,24 @@ class ApiHelperImpl @Inject  constructor(
     ): ApiResult<RetrofitDetailsResponse> = withContext(Dispatchers.IO) {
         try {
             val response = apiService.getRestaurantDetails(
-                "Bearer " + BuildConfig.TOKEN,
-                id
+                token = "Bearer " + BuildConfig.TOKEN,
+                id = id
+            )
+            ApiResult.OnSuccess(response)
+        } catch (e: Exception) {
+            ApiResult.OnError(e)
+        }
+    }
+
+    override suspend fun getRestaurantReviews(
+        id: String
+    ): ApiResult<RetrofitReviewsResponse> = withContext(Dispatchers.IO) {
+        try {
+            val response = apiService.getRestaurantReviews(
+                token = "Bearer " + BuildConfig.TOKEN,
+                id = id,
+                limit = 3,
+                sort_by = "yelp_sort"
             )
             ApiResult.OnSuccess(response)
         } catch (e: Exception) {

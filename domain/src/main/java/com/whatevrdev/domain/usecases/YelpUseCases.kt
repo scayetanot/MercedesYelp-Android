@@ -9,4 +9,7 @@ class YelpUseCases(private val yelpApiRepository: YelpApiRepository) {
 
     suspend fun getRestaurantDetails(id: String) =
         yelpApiRepository.getRestaurantDetails(id)
+
+    suspend fun getRestaurantReviews(id: String) =
+        yelpApiRepository.getRestaurantReviews(id)
 }

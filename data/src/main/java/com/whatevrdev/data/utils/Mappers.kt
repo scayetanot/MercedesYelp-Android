@@ -3,11 +3,9 @@ package com.whatevrdev.data.utils
 import android.location.Address
 import com.whatevrdev.data.network.models.RetrofitBusiness
 import com.whatevrdev.data.network.models.RetrofitDetailsResponse
+import com.whatevrdev.data.network.models.RetrofitReview
 import com.whatevrdev.data.network.models.RetrofitSearchResponse
-import com.whatevrdev.domain.entities.YelpAddress
-import com.whatevrdev.domain.entities.YelpBusiness
-import com.whatevrdev.domain.entities.YelpBusinesses
-import com.whatevrdev.domain.entities.YelpRestaurantDetails
+import com.whatevrdev.domain.entities.*
 import kotlin.math.roundToInt
 
 object Mappers {
@@ -50,6 +48,27 @@ object Mappers {
                 state = retrofitDetailsResponse.location?.state
                 )
         )
+    }
+
+    fun fromRetrofitReviewsResponseToReviews(retrofitReviewsList: List<RetrofitReview>) : List<YelpReview> {
+        val listOfReviews: MutableList<YelpReview> = mutableListOf()
+        retrofitReviewsList.forEach {
+            listOfReviews.add(
+                YelpReview(
+                    id = it.id,
+                    url = it.url,
+                    text = it.text,
+                    rating = it.rating,
+                    timeCreated =  it.timeCreated,
+                    user = YelpUser(
+                        id = it.user?.id,
+                        imageUrl = it.user?.imageUrl,
+                        name = it.user?.name
+                    )
+                )
+            )
+        }
+        return listOfReviews.toList()
     }
 
     fun fromMetersToMiles(distance: Double?): String {

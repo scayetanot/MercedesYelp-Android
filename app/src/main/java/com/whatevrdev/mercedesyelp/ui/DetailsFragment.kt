@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.whatevrdev.mercedesyelp.R
 import com.whatevrdev.mercedesyelp.databinding.FragmentDetailsBinding
 import com.whatevrdev.mercedesyelp.ui.states.RestaurantDetailsState
+import com.whatevrdev.mercedesyelp.ui.states.RestaurantReviewsState
 import com.whatevrdev.mercedesyelp.ui.viewmodels.DetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -32,7 +33,7 @@ class DetailsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         restaurantId = arguments?.getString("id").toString()
 
@@ -43,7 +44,7 @@ class DetailsFragment : Fragment() {
                 Toast.LENGTH_LONG).show()
             findNavController().navigateUp()
         } else {
-            viewModel.getRestaurantDetails(restaurantId)
+            viewModel.getRestaurantInformation(restaurantId)
         }
         binding = FragmentDetailsBinding.inflate(layoutInflater)
         return binding.root
@@ -52,6 +53,7 @@ class DetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         subscribeToRestaurantDetails()
+        subscribeToRestaurantReviews()
     }
 
     private fun subscribeToRestaurantDetails() {
@@ -66,6 +68,26 @@ class DetailsFragment : Fragment() {
                         Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
                     }
                     is RestaurantDetailsState.Loading -> {
+                        binding.loading.loadingLayout.isVisible = true
+                    }
+                    else -> Unit
+                }
+            }
+        }
+    }
+
+    private fun subscribeToRestaurantReviews() {
+        lifecycleScope.launchWhenCreated {
+            viewModel.restaurantReviewsState.collect {
+                when(it) {
+                    is RestaurantReviewsState.Success -> {
+                        binding.loading.loadingLayout.isVisible = false
+                    }
+                    is RestaurantReviewsState.Error -> {
+                        binding.loading.loadingLayout.isVisible = false
+                        Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
+                    }
+                    is RestaurantReviewsState.Loading -> {
                         binding.loading.loadingLayout.isVisible = true
                     }
                     else -> Unit
