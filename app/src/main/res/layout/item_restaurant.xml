@@ -19,17 +19,32 @@
         android:layout_height="100dp"
         android:onClick="@{() -> viewModel.onClick(item.id)}">
 
-        <ImageView
-            android:id="@+id/restaurantImage"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/restaurantImageView"
             android:layout_width="76dp"
             android:layout_height="76dp"
             android:layout_marginStart="@dimen/default_margin"
-            android:background="@color/red_blur"
-            android:scaleType="centerCrop"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:layout_marginEnd="@dimen/medium_margin"
+            app:cardBackgroundColor="@android:color/white"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/restaurantImage"
+                android:layout_width="76dp"
+                android:layout_height="76dp"
+                android:background="@color/red_blur"
+                android:layout_gravity="center"
+                android:scaleType="centerCrop"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+
+        </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/restaurantName"
@@ -37,9 +52,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/medium_margin"
             android:textAppearance="@style/SubHeader"
+            android:textSize="16sp"
             android:text="@{item.name}"
-            app:layout_constraintTop_toTopOf="@+id/restaurantImage"
-            app:layout_constraintStart_toEndOf="@+id/restaurantImage"
+            app:layout_constraintTop_toTopOf="@+id/restaurantImageView"
+            app:layout_constraintStart_toEndOf="@+id/restaurantImageView"
             app:layout_constraintEnd_toStartOf="@+id/restaurantRating"
             tools:text="@string/name"/>
 
@@ -61,10 +77,10 @@
             android:layout_marginStart="@dimen/medium_margin"
             android:layout_marginTop="@dimen/small_margin"
             android:text="@{item.price}"
-            app:layout_constraintStart_toEndOf="@+id/restaurantImage"
+            app:layout_constraintStart_toEndOf="@+id/restaurantImageView"
             app:layout_constraintEnd_toStartOf="@+id/restaurantDistance"
             app:layout_constraintTop_toBottomOf="@+id/restaurantName"
-            app:layout_constraintBottom_toBottomOf="@id/restaurantImage"
+            app:layout_constraintBottom_toBottomOf="@id/restaurantImageView"
             tools:text="@string/price"/>
 
         <TextView
@@ -77,7 +93,7 @@
             android:text="@{item.distance.toString()}"
             app:layout_constraintStart_toEndOf="@+id/restaurantPrice"
             app:layout_constraintTop_toBottomOf="@+id/restaurantName"
-            app:layout_constraintBottom_toBottomOf="@id/restaurantImage"
+            app:layout_constraintBottom_toBottomOf="@id/restaurantImageView"
             app:layout_constraintEnd_toEndOf="parent"
             tools:text="@string/distance"/>
 

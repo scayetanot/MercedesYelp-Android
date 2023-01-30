@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -18,6 +19,8 @@ class RestaurantDetailsViewHolder(val binding: ItemRestaurantDetailsBinding):
     fun bind(context: Context?, item: YelpRestaurantDetails?) {
         item?.let {
             binding.item = item
+            binding.restaurantPhone.isVisible = !item.phoneNumber.isNullOrBlank()
+            binding.restaurantPrice.isVisible = !item.price.isNullOrBlank()
             item.imageUrl?.let { url ->
                 val options = RequestOptions()
                     .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)

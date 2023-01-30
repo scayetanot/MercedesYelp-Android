@@ -1,12 +1,14 @@
 package com.whatevrdev.mercedesyelp.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -20,6 +22,7 @@ import com.whatevrdev.mercedesyelp.ui.states.RestaurantDetailsState
 import com.whatevrdev.mercedesyelp.ui.states.RestaurantReviewsState
 import com.whatevrdev.mercedesyelp.ui.viewmodels.DetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class DetailsFragment : Fragment() {
@@ -43,9 +46,6 @@ class DetailsFragment : Fragment() {
             restaurantReviewsAdapter)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -68,6 +68,8 @@ class DetailsFragment : Fragment() {
             layoutManager = LinearLayoutManager(context)
             adapter = concatAdapter
         }
+        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         return binding.root
     }
 
@@ -77,12 +79,24 @@ class DetailsFragment : Fragment() {
         subscribeToRestaurantReviews()
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id: Int = item.getItemId()
+        when (id) {
+            android.R.id.home -> {
+                findNavController().navigateUp()
+                return true
+            }
+        }
+        return false
+    }
+
     private fun subscribeToRestaurantDetails() {
         lifecycleScope.launchWhenCreated {
             viewModel.restaurantDetailsState.collect {
                 when(it) {
                     is RestaurantDetailsState.Success -> {
                         binding.loading.loadingLayout.isVisible = false
+                        (activity as AppCompatActivity).supportActionBar?.title = it.restaurantDetails.name
                         restaurantDetailsAdapter.updateDetails(it.restaurantDetails)
                     }
                     is RestaurantDetailsState.Error -> {

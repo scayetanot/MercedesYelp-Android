@@ -7,74 +7,85 @@
 
     </data>
 
-    <androidx.core.widget.NestedScrollView
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@null">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@null">
+            android:layout_height="match_parent">
 
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/headerContainer"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintTop_toTopOf="parent">
+                android:layout_height="match_parent"
+                android:background="@null">
 
-                <TextView
-                    android:id="@+id/homeTitle"
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/headerContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/medium_margin"
-                    android:layout_marginStart="@dimen/default_margin"
-                    android:layout_marginEnd="@dimen/default_margin"
-                    android:text="@string/title_home_page"
-                    android:textAppearance="@style/Header"
-                    android:gravity="center"/>
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:id="@+id/homeLocationName"
+                    <TextView
+                        android:id="@+id/homeTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/medium_margin"
+                        android:layout_marginStart="@dimen/default_margin"
+                        android:layout_marginEnd="@dimen/default_margin"
+                        android:text="@string/title_home_page"
+                        android:textAppearance="@style/Header"
+                        android:gravity="center"/>
+
+                    <TextView
+                        android:id="@+id/homeLocationName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/medium_margin"
+                        android:layout_marginStart="@dimen/default_margin"
+                        android:layout_marginEnd="@dimen/default_margin"
+                        android:gravity="center"
+                        android:textAppearance="@style/SubHeader"
+                        app:layout_constraintTop_toBottomOf="@+id/homeTitle"
+                        tools:text="@string/location_dflt"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@color/black"
+                        android:layout_marginTop="@dimen/medium_margin"/>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/medium_margin"
-                    android:layout_marginStart="@dimen/default_margin"
-                    android:layout_marginEnd="@dimen/default_margin"
-                    android:gravity="center"
-                    android:textAppearance="@style/SubHeader"
-                    app:layout_constraintTop_toBottomOf="@+id/homeTitle"
-                    tools:text="@string/location_dflt"/>
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@+id/headerContainer">
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:background="@color/black"
-                    android:layout_marginTop="@dimen/medium_margin"/>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/homeListOfRestaurantsResults"
+                        android:background="@null"
+                        android:layout_marginTop="@dimen/medium_margin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        tools:itemCount="5"
+                        tools:listitem="@layout/item_restaurant"/>
 
-            </androidx.appcompat.widget.LinearLayoutCompat>
+                    <include
+                        android:id="@+id/loading"
+                        layout="@layout/layout_loading" />
 
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/homeListOfRestaurantsResults"
-                android:background="@null"
-                android:layout_marginTop="@dimen/medium_margin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/headerContainer"
-                tools:itemCount="5"
-                tools:listitem="@layout/item_restaurant">
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </androidx.recyclerview.widget.RecyclerView>
+        </androidx.core.widget.NestedScrollView>
 
-            <include
-                android:id="@+id/loading"
-                layout="@layout/layout_loading" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.core.widget.NestedScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </layout>

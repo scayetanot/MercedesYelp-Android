@@ -9,6 +9,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.whatevrdev.domain.entities.YelpBusiness
+import com.whatevrdev.mercedesyelp.R
 import com.whatevrdev.mercedesyelp.databinding.ItemRestaurantBinding
 import com.whatevrdev.mercedesyelp.ui.viewmodels.HomeViewModel
 
@@ -18,6 +19,7 @@ class ListOfRestaurantsViewHolder(val binding: ItemRestaurantBinding):
     fun bind(context: Context?, item: YelpBusiness, viewModel: HomeViewModel) {
         binding.item = item
         binding.viewModel = viewModel
+
         item.imageUrl?.let { url ->
             val options = RequestOptions()
                 .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
