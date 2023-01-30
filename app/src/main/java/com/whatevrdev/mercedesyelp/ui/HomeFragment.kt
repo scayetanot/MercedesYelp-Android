@@ -63,6 +63,11 @@ class HomeFragment : Fragment() {
             layoutManager = LinearLayoutManager(context)
             adapter = listOfRestaurantsAdapter
         }
+
+        binding.refreshLayout.setProgressViewEndTarget(false, 0);
+        binding.refreshLayout.setOnRefreshListener {
+            viewModel.requestLocation()
+        }
         return binding.root
     }
 

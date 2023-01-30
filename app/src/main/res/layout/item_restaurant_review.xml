@@ -21,24 +21,40 @@
             android:layout_marginStart="@dimen/default_margin"
             android:layout_marginEnd="@dimen/default_margin">
 
-            <ImageView
-                android:id="@+id/profilePic"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/profilePicView"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:background="@color/red_blur"
-                android:scaleType="centerCrop"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:layout_marginEnd="@dimen/medium_margin"
+                app:cardBackgroundColor="@android:color/white"
+                app:cardCornerRadius="50dp"
+                app:cardElevation="0dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/profilePic"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:scaleType="centerCrop"
+                    android:layout_gravity="center"
+                    android:background="@color/red_blur"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+            </androidx.cardview.widget.CardView>
 
             <TextView
                 android:id="@+id/userName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
+                android:textSize="18sp"
+                android:textStyle="bold"
                 android:text="@{item.user.name}"
                 android:layout_marginStart="@dimen/default_margin"
-                app:layout_constraintTop_toTopOf="@+id/profilePic"
-                app:layout_constraintStart_toEndOf="@+id/profilePic"
+                app:layout_constraintTop_toTopOf="@+id/profilePicView"
+                app:layout_constraintStart_toEndOf="@+id/profilePicView"
                 app:layout_constraintEnd_toStartOf="@+id/date"
                 tools:text="name"/>
 
@@ -46,10 +62,10 @@
                 android:id="@+id/date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:text="@{item.timeCreated}"
                 android:layout_marginStart="@dimen/default_margin"
-                app:layout_constraintTop_toTopOf="@+id/profilePic"
+                app:layout_constraintTop_toTopOf="@+id/profilePicView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/userName"
                 tools:text="date"/>
@@ -58,11 +74,11 @@
                 android:id="@+id/rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:text="@{item.rating.toString()}"
                 android:layout_marginStart="@dimen/default_margin"
-                app:layout_constraintBottom_toBottomOf="@+id/profilePic"
-                app:layout_constraintStart_toEndOf="@+id/profilePic"
+                app:layout_constraintBottom_toBottomOf="@+id/profilePicView"
+                app:layout_constraintStart_toEndOf="@+id/profilePicView"
                 tools:text="rating"/>
 
 

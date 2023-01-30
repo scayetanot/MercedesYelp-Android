@@ -12,6 +12,6 @@
 
     <!-- Details Fragment -->
     <string name="no_restaurant_id">Sorry! we didn\'t find any restaurants matching your request</string>
-
+    <string name="price_not_available">Price not available!</string>
 
 </resources>
